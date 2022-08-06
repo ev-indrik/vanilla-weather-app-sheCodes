@@ -72,14 +72,21 @@ function showMyData(event) {
 
 let apiKey = "e198a574d16b9223ea11e9b7c93f17a0";
 let locationButton = document.querySelector("#button-currentPosition");
+let humidityElement = document.querySelector("#humidity");
+let windElement = document.querySelector("#wind");
 locationButton.addEventListener("click", showMyData);
 
 // Weather by City name
 
 function showMycityTemp(dataAboutMyCity) {
+  console.log(dataAboutMyCity);
   let tempicon = document.querySelector("#mainTemp");
   h2.innerHTML = dataAboutMyCity.data.name;
   tempicon.innerHTML = Math.round(dataAboutMyCity.data.main.temp);
+  humidityElement.innerHTML = `Humidity: ${dataAboutMyCity.data.main.humidity} %`;
+  windElement.innerHTML = `Windspeed: ${Math.round(
+    dataAboutMyCity.data.wind.speed
+  )} km/h`;
 }
 
 function getMyCityWeather(event) {

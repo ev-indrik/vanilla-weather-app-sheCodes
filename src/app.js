@@ -53,6 +53,7 @@ function showTemp(locationInfo) {
   let humidityElement = document.querySelector("#humidity");
   let h2 = document.querySelector("h2");
   let tempicon = document.querySelector("#mainTemp");
+  let iconElement = document.querySelector("#weather-icon");
   let cityChosen = locationInfo.data.name;
   let tempChosen = Math.round(locationInfo.data.main.temp);
 
@@ -62,6 +63,10 @@ function showTemp(locationInfo) {
   windElement.innerHTML = `Windspeed: ${Math.round(
     locationInfo.data.wind.speed
   )} km/h`;
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${locationInfo.data.weather[0].icon}@2x.png`
+  );
 }
 
 function showMyData(event) {
@@ -85,13 +90,19 @@ locationButton.addEventListener("click", showMyData);
 // Weather by City name
 
 function showMycityTemp(dataAboutMyCity) {
+  let iconElement = document.querySelector("#weather-icon");
   let tempicon = document.querySelector("#mainTemp");
+
   h2.innerHTML = dataAboutMyCity.data.name;
   tempicon.innerHTML = Math.round(dataAboutMyCity.data.main.temp);
   humidityElement.innerHTML = `Humidity: ${dataAboutMyCity.data.main.humidity} %`;
   windElement.innerHTML = `Windspeed: ${Math.round(
     dataAboutMyCity.data.wind.speed
   )} km/h`;
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${dataAboutMyCity.data.weather[0].icon}@2x.png`
+  );
 }
 
 function getMyCityWeather(event) {

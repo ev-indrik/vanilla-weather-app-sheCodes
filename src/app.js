@@ -6,6 +6,7 @@ let hours = now.getHours();
 let minutes = now.getMinutes();
 let timeNow = "Time: " + hours + ":" + minutes;
 let date = now.getDate();
+//test test test
 
 let weekDays = [
   "Sunday",

@@ -46,7 +46,9 @@ monthSpan.innerHTML = monthNow;
 let dateSpan = document.querySelector("#dateSpan");
 dateSpan.innerHTML = date;
 
-// City change and temp change according to location and city
+let celsiusGlobal = null;
+
+// City change and temp change according to location
 
 function showTemp(locationInfo) {
   let locationButton = document.querySelector("#button-currentPosition");
@@ -55,10 +57,11 @@ function showTemp(locationInfo) {
   let tempicon = document.querySelector("#mainTemp");
   let iconElement = document.querySelector("#weather-icon");
   let cityChosen = locationInfo.data.name;
-  let tempChosen = Math.round(locationInfo.data.main.temp);
+  celsiusGlobal = Math.round(locationInfo.data.main.temp);
+  console.log(celsiusGlobal);
 
   h2.innerHTML = cityChosen;
-  tempicon.innerHTML = tempChosen;
+  tempicon.innerHTML = celsiusGlobal;
   humidityElement.innerHTML = `Humidity: ${locationInfo.data.main.humidity} %`;
   windElement.innerHTML = `Windspeed: ${Math.round(
     locationInfo.data.wind.speed
@@ -91,10 +94,10 @@ locationButton.addEventListener("click", showMyData);
 
 function showMycityTemp(dataAboutMyCity) {
   let iconElement = document.querySelector("#weather-icon");
-  let tempicon = document.querySelector("#mainTemp");
+  let celsiusGlobal = document.querySelector("#mainTemp");
 
   h2.innerHTML = dataAboutMyCity.data.name;
-  tempicon.innerHTML = Math.round(dataAboutMyCity.data.main.temp);
+  celsiusGlobal.innerHTML = Math.round(dataAboutMyCity.data.main.temp);
   humidityElement.innerHTML = `Humidity: ${dataAboutMyCity.data.main.humidity} %`;
   windElement.innerHTML = `Windspeed: ${Math.round(
     dataAboutMyCity.data.wind.speed
@@ -126,17 +129,22 @@ let celsiusMark = document.querySelector("#celsius");
 let fahrenheitMark = document.querySelector("#fahrenheit");
 let celsiusValue = document.querySelector("#mainTemp");
 
-function celsiusEvent() {
-  fahrenheitMark.classList.remove("special");
-  celsiusMark.classList.add("special");
+function celsiusClick(event) {
+  event.preventDefault();
+  fahrenheitMark.classList.remove("active");
+  celsiusMark.classList.add("active");
+  h1.innerHTML = celsiusGlobal;
 }
 
-function fahrenheitEvent() {
-  celsiusMark.classList.remove("special");
-  fahrenheitMark.classList.add("special");
-  let fahrenheitFinal = Math.round(Number(celsiusValue.textContent) * 1.8 + 32);
+function fahrenheitClick(event) {
+  event.preventDefault();
+  console.log(celsiusGlobal);
+  celsiusMark.classList.remove("active");
+  fahrenheitMark.classList.add("active");
+  let fahrenheitFinal = Math.round(Number(celsiusGlobal) * 1.8 + 32);
   h1.innerHTML = fahrenheitFinal;
 }
+// -------
 
-celsiusMark.addEventListener("click", celsiusEvent);
-fahrenheitMark.addEventListener("click", fahrenheitEvent);
+celsiusMark.addEventListener("click", celsiusClick);
+fahrenheitMark.addEventListener("click", fahrenheitClick);

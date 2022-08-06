@@ -49,6 +49,8 @@ dateSpan.innerHTML = date;
 // City change and temp change according to location and city
 
 function showTemp(locationInfo) {
+  let locationButton = document.querySelector("#button-currentPosition");
+  let humidityElement = document.querySelector("#humidity");
   let h2 = document.querySelector("h2");
   let tempicon = document.querySelector("#mainTemp");
   let cityChosen = locationInfo.data.name;
@@ -56,6 +58,10 @@ function showTemp(locationInfo) {
 
   h2.innerHTML = cityChosen;
   tempicon.innerHTML = tempChosen;
+  humidityElement.innerHTML = `Humidity: ${locationInfo.data.main.humidity} %`;
+  windElement.innerHTML = `Windspeed: ${Math.round(
+    locationInfo.data.wind.speed
+  )} km/h`;
 }
 
 function showMyData(event) {
@@ -79,7 +85,6 @@ locationButton.addEventListener("click", showMyData);
 // Weather by City name
 
 function showMycityTemp(dataAboutMyCity) {
-  console.log(dataAboutMyCity);
   let tempicon = document.querySelector("#mainTemp");
   h2.innerHTML = dataAboutMyCity.data.name;
   tempicon.innerHTML = Math.round(dataAboutMyCity.data.main.temp);

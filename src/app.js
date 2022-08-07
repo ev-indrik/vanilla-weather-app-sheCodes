@@ -48,17 +48,15 @@ dateSpan.innerHTML = date;
 
 let celsiusGlobal = null;
 
-// City change and temp change according to location
+// City change and temp change according GPS
 
 function showTemp(locationInfo) {
-  let locationButton = document.querySelector("#button-currentPosition");
   let humidityElement = document.querySelector("#humidity");
   let h2 = document.querySelector("h2");
   let tempicon = document.querySelector("#mainTemp");
   let iconElement = document.querySelector("#weather-icon");
   let cityChosen = locationInfo.data.name;
   celsiusGlobal = Math.round(locationInfo.data.main.temp);
-  console.log(celsiusGlobal);
 
   h2.innerHTML = cityChosen;
   tempicon.innerHTML = celsiusGlobal;
@@ -75,6 +73,8 @@ function showTemp(locationInfo) {
 function showMyData(event) {
   event.preventDefault();
 
+  inputButton.value = null;
+
   navigator.geolocation.getCurrentPosition((currentLocation) => {
     let latitude = currentLocation.coords.latitude;
     let longitude = currentLocation.coords.longitude;
@@ -88,17 +88,21 @@ let apiKey = "e198a574d16b9223ea11e9b7c93f17a0";
 let locationButton = document.querySelector("#button-currentPosition");
 let humidityElement = document.querySelector("#humidity");
 let windElement = document.querySelector("#wind");
+
 locationButton.addEventListener("click", showMyData);
 
 // Weather by City name
 
 function showMycityTemp(dataAboutMyCity) {
   fahrenheitMark.classList.remove("active");
+
   let iconElement = document.querySelector("#weather-icon");
   celsiusByCity = document.querySelector("#mainTemp");
 
+  celsiusGlobal = Math.round(dataAboutMyCity.data.main.temp);
+
   h2.innerHTML = dataAboutMyCity.data.name;
-  celsiusByCity.innerHTML = Math.round(dataAboutMyCity.data.main.temp);
+  celsiusByCity.innerHTML = celsiusGlobal;
   humidityElement.innerHTML = `Humidity: ${dataAboutMyCity.data.main.humidity} %`;
   windElement.innerHTML = `Windspeed: ${Math.round(
     dataAboutMyCity.data.wind.speed

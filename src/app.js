@@ -51,6 +51,9 @@ let celsiusGlobal = null;
 // City change and temp change according GPS
 
 function showTemp(locationInfo) {
+  fahrenheitMark.classList.remove("active");
+  celsiusMark.classList.add("active");
+
   let humidityElement = document.querySelector("#humidity");
   let h2 = document.querySelector("h2");
   let tempicon = document.querySelector("#mainTemp");
@@ -95,6 +98,7 @@ locationButton.addEventListener("click", showMyData);
 
 function showMycityTemp(dataAboutMyCity) {
   fahrenheitMark.classList.remove("active");
+  celsiusMark.classList.add("active");
 
   let iconElement = document.querySelector("#weather-icon");
   celsiusByCity = document.querySelector("#mainTemp");

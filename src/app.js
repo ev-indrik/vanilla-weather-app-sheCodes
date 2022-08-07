@@ -6,7 +6,6 @@ let hours = now.getHours();
 let minutes = now.getMinutes();
 let timeNow = "Time: " + hours + ":" + minutes;
 let date = now.getDate();
-//test test test
 
 let weekDays = [
   "Sunday",
@@ -94,11 +93,12 @@ locationButton.addEventListener("click", showMyData);
 // Weather by City name
 
 function showMycityTemp(dataAboutMyCity) {
+  fahrenheitMark.classList.remove("active");
   let iconElement = document.querySelector("#weather-icon");
-  let celsiusGlobal = document.querySelector("#mainTemp");
+  celsiusByCity = document.querySelector("#mainTemp");
 
   h2.innerHTML = dataAboutMyCity.data.name;
-  celsiusGlobal.innerHTML = Math.round(dataAboutMyCity.data.main.temp);
+  celsiusByCity.innerHTML = Math.round(dataAboutMyCity.data.main.temp);
   humidityElement.innerHTML = `Humidity: ${dataAboutMyCity.data.main.humidity} %`;
   windElement.innerHTML = `Windspeed: ${Math.round(
     dataAboutMyCity.data.wind.speed
@@ -139,13 +139,12 @@ function celsiusClick(event) {
 
 function fahrenheitClick(event) {
   event.preventDefault();
-  console.log(celsiusGlobal);
+
   celsiusMark.classList.remove("active");
   fahrenheitMark.classList.add("active");
   let fahrenheitFinal = Math.round(Number(celsiusGlobal) * 1.8 + 32);
   h1.innerHTML = fahrenheitFinal;
 }
-// -------
 
 celsiusMark.addEventListener("click", celsiusClick);
 fahrenheitMark.addEventListener("click", fahrenheitClick);

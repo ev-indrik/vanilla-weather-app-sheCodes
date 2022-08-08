@@ -10,7 +10,7 @@ body {
   font-family: "Raleway", sans-serif;
   max-width: 500px;
 }
-img {
+img.main-sun {
   display: block;
   width: 150px;
   margin-left: 30px;
@@ -79,7 +79,7 @@ li {
 .additional-body .temp-item {
   margin: 0 5px;
   border-right: 1px solid #ced4da;
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
   color: #006ec5;
 }
@@ -91,6 +91,10 @@ li {
 .active {
   color: #e8ba13;
   pointer-events: none;
+}
+
+.forecast-weather-min {
+  opacity: 0.7;
 }
 
 #developerSignature {

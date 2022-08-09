@@ -63,7 +63,7 @@ li {
   color: #006ec5;
 }
 
-.additional-body {
+#forecast-section {
   padding: 5px;
   margin: 0;
   background: linear-gradient(
@@ -76,17 +76,16 @@ li {
   border: 1px solid #ced4da;
 }
 
-.additional-body .temp-item {
-  margin: 0 5px;
+#forecast-section .temp-item {
   border-right: 1px solid #ced4da;
   font-size: 14px;
   text-align: center;
   color: #006ec5;
 }
 
-.additional-body .temp-item:last-child {
+/* #forecast-section .temp-item:last-child {
   border-right: none;
-}
+} */
 
 .active {
   color: #e8ba13;

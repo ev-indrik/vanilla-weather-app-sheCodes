@@ -48,6 +48,26 @@ dateSpan.innerHTML = date;
 
 let celsiusGlobal = null;
 
+//Forecast
+let forecastElement = document.querySelector("#forecast-section");
+let forecastDays = ["Wed", "Thu", "Fri", "Sat", "Sun", "Mon"];
+let forecastHTML = `<div class="row">`;
+
+forecastDays.forEach(function (day) {
+  forecastHTML =
+    forecastHTML +
+    `<div class="col-2 temp-item">
+          <span class="forecast-weather-max">18</span>°
+          <span class="forecast-weather-min">16</span>°C<br />
+          <img src="./src/media/icons/windy.png" alt="" width="46" />
+          <br />
+          ${day}
+        </div>`;
+});
+
+forecastHTML = forecastHTML + `</div>`;
+forecastElement.innerHTML = forecastHTML;
+
 // City change and temp change according GPS
 
 function showTemp(locationInfo) {

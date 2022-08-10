@@ -52,14 +52,10 @@ let celsiusGlobal = null;
 
 //Forecast staff
 
-let dayForecast = null;
-let maxForecast = null;
-let minForecast = null;
-let iconForecast = null;
 let longitude = null;
 let latitude = null;
 
-//Forecast
+//Forecast for gps
 
 function displayForecastGps(gpsInfoArray) {
   let forecastData = gpsInfoArray.data.daily;
@@ -78,7 +74,7 @@ function displayForecastGps(gpsInfoArray) {
   let forecastHTML = `<div class="row">`;
 
   forecastData.forEach(function (forecastDay, index) {
-    if (index < 6) {
+    if (index > 0 && index < 7) {
       forecastHTML =
         forecastHTML +
         `<div class="col-2 temp-item">
@@ -153,6 +149,49 @@ function showMycityTemp(dataAboutMyCity) {
   fahrenheitMark.classList.remove("active");
   celsiusMark.classList.add("active");
 
+  function displayCityForecast(result) {
+    let cityForecast = result.data.daily;
+
+    let forecastElement = document.querySelector("#forecast-section");
+
+    function formatDate(timestamp) {
+      let date = new Date(timestamp * 1000);
+      let day = date.getDay();
+      let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      let forecastDays = days[day];
+
+      return forecastDays;
+    }
+
+    let forecastHTML = `<div class="row">`;
+
+    cityForecast.forEach(function (cityForecast, index) {
+      if (index > 0 && index < 7) {
+        forecastHTML =
+          forecastHTML +
+          `<div class="col-2 temp-item">
+          <span class="forecast-weather-max">${Math.round(
+            cityForecast.temp.max
+          )}</span>°
+          <span class="forecast-weather-min">${Math.round(
+            cityForecast.temp.min
+          )}</span>°C<br />
+          <img src="https://openweathermap.org/img/wn/${
+            cityForecast.weather[0].icon
+          }@2x.png" alt="" width="46" />
+          <br />
+          ${formatDate(cityForecast.dt)}
+        </div>`;
+      }
+    });
+
+    forecastHTML = forecastHTML + `</div>`;
+    forecastElement.innerHTML = forecastHTML;
+  }
+
+  latitude = dataAboutMyCity.data.coord.lat;
+  longitude = dataAboutMyCity.data.coord.lon;
+
   let iconElement = document.querySelector("#weather-icon");
   celsiusByCity = document.querySelector("#mainTemp");
 
@@ -168,6 +207,10 @@ function showMycityTemp(dataAboutMyCity) {
     "src",
     `https://openweathermap.org/img/wn/${dataAboutMyCity.data.weather[0].icon}@2x.png`
   );
+
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayCityForecast);
 }
 
 function getMyCityWeather(event) {

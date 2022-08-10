@@ -64,6 +64,7 @@ li {
 }
 
 #forecast-section {
+  min-height: 100px;
   padding: 5px;
   margin: 0;
   background: linear-gradient(
@@ -83,9 +84,9 @@ li {
   color: #006ec5;
 }
 
-/* #forecast-section .temp-item:last-child {
+#forecast-section .temp-item:last-child {
   border-right: none;
-} */
+}
 
 .active {
   color: #e8ba13;

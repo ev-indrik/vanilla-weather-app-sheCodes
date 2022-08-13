@@ -215,6 +215,8 @@ function showMycityTemp(dataAboutMyCity) {
 
 function getMyCityWeather(event) {
   event.preventDefault();
+  fahrenheitMark.classList.remove("special");
+  celsiusMark.classList.add("special");
 
   let myCity = inputButton.value;
   let apiUrlCity = `https://api.openweathermap.org/data/2.5/weather?q=${myCity}&appid=${apiKey}&units=metric`;
